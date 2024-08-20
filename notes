@@ -1,3 +1,11 @@
 * jämnt med dagar
 * om det är mer än tre dagar mellan datum då kan personen städa dem
 * en veckas vila minst
+
+Lösning(?)
+    I person.py, uppdatera calendern enligt if satser ifall
+    det datum som finns i missing_dates har mindre än tre dagar till nästa
+    missing_date. Om det är mindre än tre dagar, sätt ett kryss i det intervallet för personens kalender.
+
+    När detta gjorts på alla, börja dela ut datum. Prioritera dela ut datum
+    till dem med högst antal missing_dates.
