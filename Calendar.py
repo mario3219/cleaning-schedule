@@ -39,4 +39,7 @@ class Calendar():
 if __name__ == '__main__':
     calendar = Calendar()
     calendar.calendar[1][1] = 'X'
+    calendar.calendar[3] = calendar.calendar[3][10:len(calendar.calendar[3])]
+    calendar.calendar = calendar.calendar[0:5]
+
     print(tabulate(calendar.calendar))
