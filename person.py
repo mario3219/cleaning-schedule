@@ -25,7 +25,4 @@ class Person:
         pass
 
 if __name__ == '__main__':
-    person = Person('Jonathan')
-    person.addMissing([1,3],[4,5])
-    print(tabulate(person.calendar.calendar))
-    print(person.getTotalCleaningDays())
+    pass
