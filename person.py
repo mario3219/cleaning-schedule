@@ -20,6 +20,9 @@ class Person:
                 if day == 'X':
                     sum += 1
         return sum
+    
+    def getCleaningDays(self):
+        pass
 
 if __name__ == '__main__':
     person = Person('Jonathan')
