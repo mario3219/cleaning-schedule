@@ -1,15 +1,19 @@
 import numpy as np
+from Calendar import Calendar
+from tabulate import tabulate
 
 class Person:
 
-    def __init__(self, name, missing_dates):
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.calendar = Calendar()
+        self.rested = True
+        self.rest_days = 0
     
-    def addMissing(self, date):
-        pass
+    def addMissing(self, dates):
+        for date in dates:
 
-    def calibrateMissingDates(self):
-        pass
+
     
     def getTotalCleaningDays(self):
         pass
@@ -18,4 +22,6 @@ class Person:
         pass
 
 if __name__ == '__main__':
-    pass
+    person = Person('Jonathan')
+    person.addMissing([])
+    print(tabulate(person.calendar.calendar))
