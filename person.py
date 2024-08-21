@@ -12,20 +12,26 @@ class Person:
     
     def addMissing(self, date):
         self.missing_dates.append(date)
+        self.calibrateMissingDates()
 
     def calibrateMissingDates(self):
         idx = 0
         while idx < len(self.missing_dates):
             if idx + 1 == len(self.missing_dates):
                 break
-            value1 = self.missing_dates[idx]
-            value2 = self.missing_dates[idx+1]
-            diff = value2 - value1
+            diff = self.missing_dates[idx+1] - self.missing_dates[idx]
             if diff < 3:
-                missing_dates = np.arange(value1+1, value2, 1)
+                missing_dates = np.arange(self.missing_dates[idx]+1, self.missing_dates[idx+1], 1)
                 missing_dates = missing_dates.tolist()
                 self.missing_dates = self.missing_dates[0:idx+1] + missing_dates + self.missing_dates[idx+1:len(self.missing_dates)]
             idx += 1
+    
+    def getTotalCleaningDays(self):
+        sum = 0
+        for day in self.cleaning_dates:
+            if day == 'X':
+                sum += 1
+        return sum
 
     def __str__(self):
         string = str(self.name) + ' - ' + str(self.missing_dates)
