@@ -13,7 +13,6 @@ class Table:
 
             for i in range(total_rows):
                 for j in range(total_columns):
-                    name = lst[i][0]
                     if lst[i][1] == '-':
                         self.e = Entry(root, width=5, fg='black',
                                 font=('Arial',10,'bold'))
@@ -30,7 +29,7 @@ class Table:
                         else:
                             self.e.configure(background='white')
                     self.e.grid(row=i, column=j)
-                    self.e.insert(END, lst[i][j])
+                    self.e.insert(END, templst[i][j])
  
 # take the datadwdawddwdwdwdwd dwdwd
 
@@ -51,6 +50,7 @@ width = longest(people[0].calendar.calendar)
 temp = Person('temp')
 scheduler.add_start_end_date(temp, [9,10], [11,20])
 
+templst = []
 for idx in np.arange(0, scheduler.end_date[0]-scheduler.start_date[0]+1,1).tolist():
     if months[idx] == 0:
         lst.append(['January'])
@@ -72,14 +72,18 @@ for idx in np.arange(0, scheduler.end_date[0]-scheduler.start_date[0]+1,1).tolis
         print('September')
     elif months[idx] == 9:
         lst.append(['October'] + ['-']*width)
+        templst.append(['October'] + ['-']*width)
     elif months[idx] == 10:
         lst.append(['November'] + ['-']*width)
+        templst.append(['November'] + ['-']*width)
     elif months[idx] == 11:
         lst.append(['December'] + ['-']*width)
+        templst.append(['December'] + ['-']*width)
     for person in people:
-        lst.append([person.name] + temp.calendar.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
+        lst.append([person.name] + person.calendar.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
+        templst.append([person.name] + temp.calendar.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
 print(tabulate(people[0].calendar.calendar))
-print(tabulate(temp.calendar.calendar))
+print(tabulate(lst))
 
 # print(len(lst[0]), len(lst[1]), len(lst[2]))
 # print(width)
