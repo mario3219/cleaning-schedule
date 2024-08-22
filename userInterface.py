@@ -32,7 +32,7 @@ class Table:
                     self.e.grid(row=i, column=j)
                     self.e.insert(END, lst[i][j])
  
-# take the datadwdawddw
+# take the datadwdawddwdwdwdwd dwdwd
 
 people = [Person('Jonathan'), Person('Kristina'), Person('Ron'), Person('Maja')]
 people[0].addMissing([10,22])
