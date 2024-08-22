@@ -8,11 +8,12 @@ class Scheduler:
         self.people = people
         self.start_date = start_date
         self.end_date = end_date
-        for person in people:
+        for person in self.people:
             self.add_start_end_date(person, start_date, end_date)
 
     
     def addPerson(self, person):
+        self.add_start_end_date(person, self.start_date, self.end_date)
         self.people.append(person)
     
     def add_start_end_date(self, person, start_date, end_date):
@@ -84,7 +85,7 @@ class Scheduler:
             if months[idx] == 11:
                 print('December')
             temp = []
-            for person in people:
+            for person in self.people:
                 temp.append([person.name] + person.calendar.calendar[idx])
             print(tabulate(temp))
 
