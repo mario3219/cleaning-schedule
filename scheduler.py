@@ -36,25 +36,33 @@ class Scheduler:
         for month in temp.calendar:
             for day in month:
                 for person in self.people:
-                    rest_days = 0
                     idxmonth = temp.calendar.index(month)
-                    idxday = day
+                    idxday = temp.calendar[idxmonth].index(day)
                     if person.calendar.calendar[idxmonth][idxday] != 'X' and [idxmonth,idxday] not in dates_pair1 and person.rested:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair1.append([idxmonth,idxday])
-                        rest_days += 1
+                        person.rest_days += 1
                     elif person.calendar.calendar[idxmonth][idxday] != 'X' and [idxmonth,idxday] not in dates_pair2 and person.rested:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair2.append([idxmonth,idxday])
-                        rest_days += 1
-                    if rest_days == 0:
+                        person.rest_days += 1
+                    if person.rest_days == 0:
                         person.rested = True
-                    if rest_days == 7:
+                    if person.rest_days == 7:
                         person.rested = False
                     if not person.rested:
-                        rest_days -= 1
+                        person.rest_days -= 1
                     if person.getTotalCleaningDays() > sum_days_per_person:
                         break
+                if [idxmonth,idxday] not in dates_pair1:
+                    if [idxmonth,idxday] not in dates_pair2:
+                        person_with_longest_rest = self.people[0]
+                        for person in self.people:
+                            if person.rest_days > person_with_longest_rest.rest_days:
+                                person_with_longest_rest = person
+                        person_with_longest_rest.calendar.calendar[idxmonth][idxday] = 'H'
+                        dates_pair1.append([idxmonth,idxday])
+                        person_with_longest_rest.rest_days += 1
     #
     def printSchedule(self):
         months = np.arange(self.start_date[0],self.end_date[0]+1,1)

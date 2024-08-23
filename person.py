@@ -8,6 +8,7 @@ class Person:
         self.name = name
         self.calendar = Calendar()
         self.rested = True
+        self.rest_days = 0
     
     def addMissing(self, *dates):
         for date in dates:
