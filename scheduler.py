@@ -17,9 +17,7 @@ class Scheduler:
         self.people.append(person)
     
     def add_start_end_date(self, person, start_date, end_date):
-        person.calendar.calendar[start_date[0]] = person.calendar.calendar[start_date[0]][start_date[1]-1:len(person.calendar.calendar[start_date[0]])]
-        person.calendar.calendar[end_date[0]] = person.calendar.calendar[end_date[0]][0:end_date[1]]
-        person.calendar.calendar = person.calendar.calendar[start_date[0]:end_date[0]+1]
+        person.calendar.add_start_end_date(self.start_date, self.end_date)
     
     def schedule(self):
 

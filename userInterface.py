@@ -32,65 +32,65 @@ class Table:
                             self.e.configure(background='white')
                     self.e.grid(row=i, column=j)
                     self.e.insert(END, templst[i][j])
- 
-# take the datadwdawddwdwdwdwd dwdwd
 
-people = [Person('Jonathan'), Person('Kristina'), Person('Ron'), Person('Maja')]
-people[0].addMissing([10,22])
-people[0].addMissing([9,11],[9,12],[9,13])
-scheduler = Scheduler(people, [9,10], [11,20])
-scheduler.schedule()
+if __name__ == '__main__':
 
-def longest(list1):
-    longest_list = max(len(elem) for elem in list1)
-    return longest_list
+    people = [Person('Jonathan'), Person('Kristina'), Person('Ron'), Person('Maja')]
+    people[0].addMissing([10,22])
+    people[0].addMissing([9,11],[9,12],[9,13])
+    scheduler = Scheduler(people, [9,10], [11,20])
+    scheduler.schedule()
 
-lst = []
-months = np.arange(scheduler.start_date[0],scheduler.end_date[0]+1,1)
-width = longest(people[0].calendar.calendar)
+    def longest(list):
+        longest_list = max(len(elem) for elem in list)
+        return longest_list
 
-temp = Person('temp')
-scheduler.add_start_end_date(temp, [9,10], [11,20])
+    lst = []
+    months = np.arange(scheduler.start_date[0],scheduler.end_date[0]+1,1)
+    width = longest(people[0].calendar.calendar)
 
-templst = []
-for idx in np.arange(0, scheduler.end_date[0]-scheduler.start_date[0]+1,1).tolist():
-    if months[idx] == 0:
-        lst.append(['January'])
-    elif months[idx] == 1:
-        print('February')
-    elif months[idx] == 2:
-        print('Mars')
-    elif months[idx] == 3:
-        print('April')
-    elif months[idx] == 4:
-        print('May')
-    elif months[idx] == 5:
-        print('June')
-    elif months[idx] == 6:
-        print('July')
-    elif months[idx] == 7:
-        print('August')
-    elif months[idx] == 8:
-        print('September')
-    elif months[idx] == 9:
-        lst.append(['October'] + ['-']*width)
-        templst.append(['October'] + ['-']*width)
-    elif months[idx] == 10:
-        lst.append(['November'] + ['-']*width)
-        templst.append(['November'] + ['-']*width)
-    elif months[idx] == 11:
-        lst.append(['December'] + ['-']*width)
-        templst.append(['December'] + ['-']*width)
-    for person in people:
-        lst.append([person.name] + person.calendar.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
-        templst.append([person.name] + temp.calendar.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
-print(tabulate(people[0].calendar.calendar))
-print(tabulate(lst))
+    temp = Calendar()
+    temp.add_start_end_date([9,10], [11,20])
 
-total_rows = len(lst)
-total_columns = len(lst[1])
-  
-# create root window
-root = Tk()
-t = Table(root)
-root.mainloop()
+    templst = []
+    for idx in np.arange(0, scheduler.end_date[0]-scheduler.start_date[0]+1,1).tolist():
+        if months[idx] == 0:
+            lst.append(['January'])
+        elif months[idx] == 1:
+            print('February')
+        elif months[idx] == 2:
+            print('Mars')
+        elif months[idx] == 3:
+            print('April')
+        elif months[idx] == 4:
+            print('May')
+        elif months[idx] == 5:
+            print('June')
+        elif months[idx] == 6:
+            print('July')
+        elif months[idx] == 7:
+            print('August')
+        elif months[idx] == 8:
+            print('September')
+        elif months[idx] == 9:
+            lst.append(['October'] + ['-']*width)
+            templst.append(['October'] + ['-']*width)
+        elif months[idx] == 10:
+            lst.append(['November'] + ['-']*width)
+            templst.append(['November'] + ['-']*width)
+        elif months[idx] == 11:
+            lst.append(['December'] + ['-']*width)
+            templst.append(['December'] + ['-']*width)
+        for person in people:
+            lst.append([person.name] + person.calendar.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
+            templst.append([person.name] + temp.calendar[idx] + ['-']*(width-len(person.calendar.calendar[idx])))
+    print(tabulate(people[0].calendar.calendar))
+    print(tabulate(lst))
+
+    total_rows = len(lst)
+    total_columns = len(lst[1])
+    
+    # create root window
+    root = Tk()
+    t = Table(root)
+    root.mainloop()
