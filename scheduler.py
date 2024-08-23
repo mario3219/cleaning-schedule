@@ -54,7 +54,7 @@ class Scheduler:
                         rest_days -= 1
                     if person.getTotalCleaningDays() > sum_days_per_person:
                         break
-    
+    #
     def printSchedule(self):
         months = np.arange(self.start_date[0],self.end_date[0]+1,1)
         for idx in np.arange(0, self.end_date[0]-self.start_date[0]+1,1).tolist():
