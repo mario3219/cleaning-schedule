@@ -21,9 +21,10 @@ class Scheduler:
     
     def schedule(self):
 
-        temp = self.people[0].calendar.calendar
+        temp = Calendar()
+        temp.add_start_end_date(self.start_date, self.end_date)
         sum_days_per_person = 0
-        for month in temp:
+        for month in temp.calendar:
             for day in month:
                 sum_days_per_person += 1
             sum_days_per_person -= 1
@@ -32,17 +33,17 @@ class Scheduler:
         dates_pair1 = []
         dates_pair2 = []
 
-        for person in self.people:
-            rest_days = 0
-            for month in person.calendar.calendar:
-                for day in month:
-                    idxmonth = person.calendar.calendar.index(month)
-                    idxday = person.calendar.calendar[idxmonth].index(day)
-                    if day != 'X' and [idxmonth,idxday] not in dates_pair1 and person.rested:
+        for month in temp.calendar:
+            for day in month:
+                for person in self.people:
+                    rest_days = 0
+                    idxmonth = temp.calendar.index(month)
+                    idxday = day
+                    if person.calendar.calendar[idxmonth][idxday] != 'X' and [idxmonth,idxday] not in dates_pair1 and person.rested:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair1.append([idxmonth,idxday])
                         rest_days += 1
-                    elif day != 'X' and [idxmonth,idxday] not in dates_pair2 and person.rested:
+                    elif person.calendar.calendar[idxmonth][idxday] != 'X' and [idxmonth,idxday] not in dates_pair2 and person.rested:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair2.append([idxmonth,idxday])
                         rest_days += 1
