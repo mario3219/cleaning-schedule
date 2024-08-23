@@ -6,6 +6,8 @@ from userInterface import Table
 from tkinter import *
 from scheduler import Scheduler
 
+#
+
 # ------------------------add people-----------------------------#
 
 jonathan = Person('Jonathan')
