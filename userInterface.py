@@ -90,7 +90,7 @@ if __name__ == '__main__':
     people = [Person('Jonathan'), Person('Kristina'), Person('Ron'), Person('Maja')]
     people[0].addMissing([10,22])
     people[0].addMissing([9,11],[9,12],[9,13])
-    scheduler = Scheduler(people, [9,10], [11,20])
+    scheduler = Scheduler(people, [6,10], [11,20])
     scheduler.schedule()
     
     # create root window

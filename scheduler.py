@@ -9,34 +9,33 @@ class Scheduler:
         self.start_date = start_date
         self.end_date = end_date
         for person in self.people:
-            self.add_start_end_date(person, start_date, end_date)
+            person.calendar.add_start_end_date(start_date, end_date)
 
     
     def addPerson(self, person):
-        self.add_start_end_date(person, self.start_date, self.end_date)
+        person.calendar.add_start_end_date(start_date, end_date)
         self.people.append(person)
-    
-    def add_start_end_date(self, person, start_date, end_date):
-        person.calendar.add_start_end_date(self.start_date, self.end_date)
     
     def schedule(self):
 
         temp = Calendar()
         temp.add_start_end_date(self.start_date, self.end_date)
         sum_days_per_person = 0
-        for month in temp.calendar:
-            for day in month:
-                sum_days_per_person += 1
-            sum_days_per_person -= 1
-        sum_days_per_person = sum_days_per_person*2/len(self.people)
+        # for month in temp.calendar:
+        #     for day in month:
+        #         sum_days_per_person += 1
+        #     sum_days_per_person -= 1
+        # sum_days_per_person = sum_days_per_person*2/len(self.people)
         
         dates_pair1 = []
         dates_pair2 = []
-
-        for month in temp.calendar:
-            for day in month:
+        diff = self.end_date[0] - self.start_date[0]
+        indexes_months = np.arange(0, diff+1, 1)
+        print(indexes_months)
+        for month in indexes_months:
+            for day in temp.calendar[month]:
                 for person in self.people:
-                    idxmonth = temp.calendar.index(month)
+                    idxmonth = month
                     idxday = temp.calendar[idxmonth].index(day)
                     if person.calendar.calendar[idxmonth][idxday] != 'X' and [idxmonth,idxday] not in dates_pair1 and person.rested:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
@@ -52,8 +51,8 @@ class Scheduler:
                         person.rested = False
                     if not person.rested:
                         person.rest_days -= 1
-                    if person.getTotalCleaningDays() > sum_days_per_person:
-                        break
+                    # if person.getTotalCleaningDays() > sum_days_per_person:
+                    #     break
                 if [idxmonth,idxday] not in dates_pair1:
                     if [idxmonth,idxday] not in dates_pair2:
                         person_with_longest_rest = self.people[0]
@@ -63,7 +62,7 @@ class Scheduler:
                         person_with_longest_rest.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair1.append([idxmonth,idxday])
                         person_with_longest_rest.rest_days += 1
-    #
+
     def printSchedule(self):
         months = np.arange(self.start_date[0],self.end_date[0]+1,1)
         for idx in np.arange(0, self.end_date[0]-self.start_date[0]+1,1).tolist():
@@ -97,26 +96,17 @@ class Scheduler:
             print(tabulate(temp))
 
 if __name__ == '__main__':
-    calendar = Calendar()
-    people = [Person('Jonathan'), Person('Kristina'), Person('Ron'), Person('Maja')]
-    people[0].addMissing([10,22])
-    people[0].addMissing([9,11],[9,12],[9,13])
-    print(tabulate(people[0].calendar.calendar))
-    scheduler = Scheduler(people, [9,10], [11,20])
-    scheduler.schedule()
+    jonathan = Person('Jonathan')
+    kristina = Person('Kristina')
+    ron = Person('Ron')
+    maja = Person('Maja')
 
-    for month in np.arange(0,len(people[0].calendar.calendar),1).tolist():
-        table = []
-        for person in people:
-            table.append([person.name] + person.calendar.calendar[month])
-        if month == 0:
-            print('Oktober')
-        if month == 1:
-            print('November')
-        if month == 2:
-            print('December')
-        print(tabulate(table))
-    
-    print(np.arange(9,11+1,1))
-    print(np.arange(0,11-9+1,1))
+    jonathan.addMissing([10,22])
+    maja.addMissing([9,11],[9,12],[9,13],[7,16],[7,17])
+    ron.addMissing([7,16],[7,17])
+    ron.addMissingRange([8,11],[10,5])
+
+    people = [jonathan, kristina, ron, maja]
+    scheduler = Scheduler(people, [6,10], [11,20])
+    scheduler.schedule()
     scheduler.printSchedule()
