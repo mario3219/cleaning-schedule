@@ -5,6 +5,8 @@ import numpy as np
 from tabulate import tabulate
 from Calendar import Calendar
  
+# test
+
 class Table:
      
     def __init__(self,root):
@@ -85,17 +87,6 @@ for idx in np.arange(0, scheduler.end_date[0]-scheduler.start_date[0]+1,1).tolis
 print(tabulate(people[0].calendar.calendar))
 print(tabulate(lst))
 
-# print(len(lst[0]), len(lst[1]), len(lst[2]))
-# print(width)
-# print(lst[0])
-# print(lst[1])
-# print(lst[2])
-# print(lst[0][0], lst[0][1])
-
-# lst = [['-'], ['-']]
-  
-# find total number of rows and
-# columns in list
 total_rows = len(lst)
 total_columns = len(lst[1])
   
