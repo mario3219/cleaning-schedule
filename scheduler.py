@@ -35,24 +35,27 @@ class Scheduler:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair1.append([idxmonth,idxday])
                         person.rest_days += 1
+                        person.cleaning_streak += 1
                     elif person.calendar.calendar[idxmonth][idxday] != 'X' and [idxmonth,idxday] not in dates_pair2 and person.rested:
                         person.calendar.calendar[idxmonth][idxday] = 'H'
                         dates_pair2.append([idxmonth,idxday])
                         person.rest_days += 1
+                        person.cleaning_streak += 1
                     if person.rest_days == 0:
                         person.rested = True
                     if person.rest_days == 7:
                         person.rested = False
+                        person.cleaning_streak = 0
                     if not person.rested:
                         person.rest_days -= 1
 
                 for x in [0,0]:
                     if not [idxmonth,idxday] in dates_pair1 or not [idxmonth,idxday] in dates_pair2:
                         for person in self.people:
-                            if person.calendar.calendar[idxmonth][idxday] != 'X' and person.calendar.calendar[idxmonth][idxday] != 'H':
+                            if person.calendar.calendar[idxmonth][idxday] != 'X' and person.calendar.calendar[idxmonth][idxday] != 'H' and person.cleaning_streak < 7:
                                 person_with_longest_rest = person
                         for person in self.people:
-                            if person.calendar.calendar[idxmonth][idxday] != 'X' and person.calendar.calendar[idxmonth][idxday] != 'H':
+                            if person.calendar.calendar[idxmonth][idxday] != 'X' and person.calendar.calendar[idxmonth][idxday] != 'H' and person.cleaning_streak < 7:
                                 if person.rest_days > person_with_longest_rest.rest_days:
                                     person_with_longest_rest = person
                         person_with_longest_rest.calendar.calendar[idxmonth][idxday] = 'H'
@@ -61,6 +64,7 @@ class Scheduler:
                         elif [idxmonth,idxday] not in dates_pair2:
                             dates_pair2.append([idxmonth,idxday])
                         person_with_longest_rest.rest_days += 1
+                        person.cleaning_streak += 1
 
     def printSchedule(self):
         months = np.arange(self.start_date[0],self.end_date[0]+1,1)
