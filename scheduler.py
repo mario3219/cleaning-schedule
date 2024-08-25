@@ -53,15 +53,14 @@ class Scheduler:
                         person.rest_days -= 1
                     # if person.getTotalCleaningDays() > sum_days_per_person:
                     #     break
-                if [idxmonth,idxday] not in dates_pair1:
-                    if [idxmonth,idxday] not in dates_pair2:
-                        person_with_longest_rest = self.people[0]
-                        for person in self.people:
-                            if person.rest_days > person_with_longest_rest.rest_days:
-                                person_with_longest_rest = person
-                        person_with_longest_rest.calendar.calendar[idxmonth][idxday] = 'H'
-                        dates_pair1.append([idxmonth,idxday])
-                        person_with_longest_rest.rest_days += 1
+                if [idxmonth,idxday] not in dates_pair1 or dates_pair2:
+                    person_with_longest_rest = self.people[0]
+                    for person in self.people:
+                        if person.rest_days > person_with_longest_rest.rest_days:
+                            person_with_longest_rest = person
+                    person_with_longest_rest.calendar.calendar[idxmonth][idxday] = 'H'
+                    dates_pair1.append([idxmonth,idxday])
+                    person_with_longest_rest.rest_days += 1
 
     def printSchedule(self):
         months = np.arange(self.start_date[0],self.end_date[0]+1,1)
