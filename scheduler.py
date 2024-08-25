@@ -21,17 +21,11 @@ class Scheduler:
         temp = Calendar()
         temp.add_start_end_date(self.start_date, self.end_date)
         sum_days_per_person = 0
-        # for month in temp.calendar:
-        #     for day in month:
-        #         sum_days_per_person += 1
-        #     sum_days_per_person -= 1
-        # sum_days_per_person = sum_days_per_person*2/len(self.people)
         
         dates_pair1 = []
         dates_pair2 = []
         diff = self.end_date[0] - self.start_date[0]
         indexes_months = np.arange(0, diff+1, 1).tolist()
-        print(indexes_months)
         for month in indexes_months:
             for day in temp.calendar[month]:
                 for person in self.people:
@@ -51,13 +45,11 @@ class Scheduler:
                         person.rested = False
                     if not person.rested:
                         person.rest_days -= 1
-                    # if person.getTotalCleaningDays() > sum_days_per_person:
-                    #     break
+
                 for x in [0,0]:
                     if not [idxmonth,idxday] in dates_pair1 or not [idxmonth,idxday] in dates_pair2:
                         for person in self.people:
                             if person.calendar.calendar[idxmonth][idxday] != 'X' and person.calendar.calendar[idxmonth][idxday] != 'H':
-                                print(person.calendar.calendar[idxmonth][idxday])
                                 person_with_longest_rest = person
                         for person in self.people:
                             if person.calendar.calendar[idxmonth][idxday] != 'X' and person.calendar.calendar[idxmonth][idxday] != 'H':

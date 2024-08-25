@@ -30,7 +30,6 @@ end_date = [11,20]
 # ----------------------run scheduler----------------------------#
 scheduler = Scheduler(people, start_date, end_date)
 scheduler.schedule()
-print(np.arange(0,5,1))
 
 root = Tk()
 t = Table(root, scheduler)
