@@ -10,22 +10,29 @@ from scheduler import Scheduler
 
 # ------------------------add people-----------------------------#
 
-jonathan = Person('Jonathan')
-kristina = Person('Kristina')
-ron = Person('Ron')
-maja = Person('Maja')
+theo = Person('Theo')
+joakim = Person('Joakim')
+hugo = Person('Hugo')
+joana = Person('Joana')
+sara = Person('Sara')
+german = Person('German')
+yx = Person('YX')
+marzia = Person('Marzia')
 
-jonathan.addMissing([10,22])
-maja.addMissing([9,11],[9,12],[9,13],[7,16],[7,17])
-ron.addMissing([7,16],[7,17])
-ron.addMissingRange([8,11],[10,5])
+# theo.addMissingRange([5,21],[7,8])
+# hugo.addMissingRange([5,11],[7,18])
+# joana.addMissingRange([5,25],[7,18])
+# german.addMissingRange([6,8],[6,14])
+# yx.addMissingRange([5,4],[6,4])
+# yx.addMissingRange([7,3],[7,10])
+# marzia.addMissingRange([5,17],[7,18])
 
-people = [jonathan, kristina, ron, maja]
+people = [theo, joakim, hugo, joana, sara, german, yx, marzia]
 
 # --------------start/end date to schedule for-------------------#
 
-start_date = [7,10]
-end_date = [11,20]
+start_date = [5,3]
+end_date = [7,18]
 
 # ----------------------run scheduler----------------------------#
 scheduler = Scheduler(people, start_date, end_date)
